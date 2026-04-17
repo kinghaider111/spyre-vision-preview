@@ -8,22 +8,19 @@ import { DeviceShowcase } from './three/DeviceShowcase';
 const SLIDE_DATA = [
   {
     title: 'Empowering Enterprise With',
-    highlight: 'Next-Gen Technology',
+    highlight: 'Next-Gen Workstations',
     desc: 'We engineer, scale, and manage resilient technology ecosystems that empower modern businesses to operate securely and efficiently.',
-    img: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1200'
   },
   {
     title: 'Architecting the Future of',
     highlight: 'Cloud Infrastructure',
-    desc: 'Seamlessly migrate, optimize, and secure your enterprise operations with our state-of-the-art cloud management solutions.',
-    img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200'
+    desc: 'Seamlessly migrate, optimize, and secure your enterprise operations with our state-of-the-art cloud management solutions — accessible anywhere.',
   },
   {
     title: 'Driving Innovation Through',
-    highlight: 'Intelligent Systems',
-    desc: 'Harness the power of AI-driven analytics, automation, and intelligent pipelines to unlock new business dimensions today.',
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200'
-  }
+    highlight: 'Intelligent Mobility',
+    desc: 'Harness AI-driven analytics, automation, and intelligent pipelines on every device — desktop, tablet, or in your pocket.',
+  },
 ];
 
 const slideVariants: Variants = {
