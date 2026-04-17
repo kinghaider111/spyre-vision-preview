@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 const fadeRight = {
   hidden: { opacity: 0, x: 40 },

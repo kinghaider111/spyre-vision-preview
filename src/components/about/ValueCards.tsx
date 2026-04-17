@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Lightbulb } from 'lucide-react';
 import { values } from '../../data/about';
 

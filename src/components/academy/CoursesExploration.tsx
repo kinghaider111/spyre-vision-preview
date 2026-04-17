@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ListChecks } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { courseCategories } from '../../data/academy';

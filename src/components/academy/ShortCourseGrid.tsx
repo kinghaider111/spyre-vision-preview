@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Zap, Shield, Code2 } from 'lucide-react';
 import { Course } from '../../types/academy';
 

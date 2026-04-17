@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
-import { cn } from '@/src/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { Globe, Linkedin, Mail, Twitter, Github, Menu, X, Moon, Sun, ChevronDown, ArrowRight } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { courseCategories } from '../data/academy';

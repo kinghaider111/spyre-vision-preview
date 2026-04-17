@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { advantages, categories } from '../../data/solutions';
 
 export const AdvantagesSection: React.FC = () => {

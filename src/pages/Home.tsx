@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMotionValue, useSpring } from 'motion/react';
+import { useMotionValue, useSpring } from 'framer-motion';
 import { Hero } from '../components/home/Hero';
 import { LogoTicker } from '../components/home/LogoTicker';
 import { ProductsGrid } from '../components/home/ProductsGrid';

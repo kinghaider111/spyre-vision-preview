@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence, Variants } from 'motion/react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { CheckCircle2, Calendar, Layers, Award, CreditCard, ChevronRight, Info, ChevronLeft } from 'lucide-react';
 import { diplomasData } from '../../data/academy';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useTransform, MotionValue, Variants } from 'motion/react';
+import { motion, AnimatePresence, useTransform, MotionValue, Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Cloud, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedCounter } from './LogoTicker';

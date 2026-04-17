@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Banknote, BookOpen, CheckCircle, MonitorPlay, Users, Award } from 'lucide-react';
 import { courseCategories } from '../data/academy';
 import SEO from '../components/SEO';
