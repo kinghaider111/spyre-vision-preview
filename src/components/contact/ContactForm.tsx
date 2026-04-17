@@ -31,25 +31,11 @@ export const ContactForm: React.FC = () => {
     if (!validate()) return;
     setStatus('loading');
     setErrorMessage('');
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const result = await response.json();
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: 'Enterprise Solutions', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        setStatus('error');
-        setErrorMessage(result.error || 'Failed to send. Please try again.');
-      }
-    } catch {
-      setStatus('error');
-      setErrorMessage('A network error occurred. Please check your connection.');
-    }
+    // UI-only demo: simulate a successful send (no backend wired up).
+    await new Promise((r) => setTimeout(r, 800));
+    setStatus('success');
+    setFormData({ name: '', email: '', subject: 'Enterprise Solutions', message: '' });
+    setTimeout(() => setStatus('idle'), 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
