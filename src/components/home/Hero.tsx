@@ -7,19 +7,19 @@ import { DeviceShowcase } from './three/DeviceShowcase';
 
 const SLIDE_DATA = [
   {
-    title: 'Empowering Enterprise With',
-    highlight: 'Next-Gen Workstations',
-    desc: 'We engineer, scale, and manage resilient technology ecosystems that empower modern businesses to operate securely and efficiently.',
+    title: 'Smart Software for',
+    highlight: 'Hospitals & ERP',
+    desc: 'We build easy-to-use Hospital Management Systems and ERP software that help your team save time, reduce mistakes, and run daily work smoothly.',
   },
   {
-    title: 'Architecting the Future of',
-    highlight: 'Cloud Infrastructure',
-    desc: 'Seamlessly migrate, optimize, and secure your enterprise operations with our state-of-the-art cloud management solutions — accessible anywhere.',
+    title: 'Custom Software &',
+    highlight: 'Sales Solutions',
+    desc: 'From websites to POS and mobile apps — we design tools that grow your sales, manage customers, and keep your business running every day.',
   },
   {
-    title: 'Driving Innovation Through',
-    highlight: 'Intelligent Mobility',
-    desc: 'Harness AI-driven analytics, automation, and intelligent pipelines on every device — desktop, tablet, or in your pocket.',
+    title: 'Tech Courses &',
+    highlight: 'Career Training',
+    desc: 'Join our Academy to learn modern web, mobile, and AI skills with hands-on projects. Simple lessons, real practice, and full support to land your first tech job.',
   },
 ];
 
@@ -144,7 +144,7 @@ export const Hero: React.FC<HeroProps> = ({ smoothX, smoothY }) => {
 
       <div className="container relative z-10 mx-auto px-6 xl:px-26 pt-28 pb-16 lg:pt-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-12 items-start">
-          <div className="flex flex-col gap-5 order-2 lg:order-1 text-center lg:text-left items-center lg:items-start w-full">
+          <div className="flex flex-col gap-5 order-2 lg:order-1 text-center lg:text-left items-center lg:items-start w-full lg:pl-8 xl:pl-16">
 
             {/* Pill badge */}
             <motion.div
