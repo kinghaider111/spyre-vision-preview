@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import { Laptop } from "./Laptop";
@@ -15,44 +15,52 @@ interface DeviceShowcaseProps {
 function DeviceStage({ index }: { index: number }) {
   const groupRef = useRef<THREE.Group>(null);
   const prevIndex = useRef(index);
+  const targetRot = useRef({ x: 0, y: 0 });
+  const { mouse } = useThree();
 
-  // GSAP entry animation whenever the slide changes
+  // Cinematic intro animation per slide change (MacBook-style open)
   useEffect(() => {
     if (!groupRef.current) return;
     const dir = index > prevIndex.current ? 1 : -1;
     prevIndex.current = index;
-    gsap.fromTo(
-      groupRef.current.rotation,
-      { y: dir * Math.PI * 0.6 },
-      { y: 0, duration: 1.1, ease: "power3.out" }
-    );
-    gsap.fromTo(
-      groupRef.current.scale,
-      { x: 0.4, y: 0.4, z: 0.4 },
-      { x: 1, y: 1, z: 1, duration: 0.9, ease: "back.out(1.7)" }
-    );
-    gsap.fromTo(
-      groupRef.current.position,
-      { y: -1.2 },
-      { y: 0, duration: 0.9, ease: "power3.out" }
-    );
+
+    const g = groupRef.current;
+    gsap.killTweensOf([g.rotation, g.scale, g.position]);
+
+    // Reset
+    g.rotation.set(-0.5, dir * Math.PI * 0.5, 0);
+    g.scale.set(0.5, 0.5, 0.5);
+    g.position.set(0, -0.6, -1);
+
+    const tl = gsap.timeline();
+    tl.to(g.position, { y: 0, z: 0, duration: 1.1, ease: "power3.out" }, 0);
+    tl.to(g.scale, { x: 1, y: 1, z: 1, duration: 1.0, ease: "back.out(1.4)" }, 0);
+    tl.to(g.rotation, { y: 0, duration: 1.2, ease: "power3.out" }, 0);
+    tl.to(g.rotation, { x: 0, duration: 1.4, ease: "power2.out" }, 0.1);
   }, [index]);
 
-  // Idle gentle rotation
+  // Mouse-driven tilt + gentle idle bob
   useFrame((_, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.15;
+    if (!groupRef.current) return;
+    targetRot.current.y = mouse.x * 0.35;
+    targetRot.current.x = -mouse.y * 0.2;
+    // Lerp toward target (skip during intro by checking scale)
+    if (groupRef.current.scale.x > 0.95) {
+      groupRef.current.rotation.y +=
+        (targetRot.current.y - groupRef.current.rotation.y) * Math.min(delta * 3, 1);
+      groupRef.current.rotation.x +=
+        (targetRot.current.x - groupRef.current.rotation.x) * Math.min(delta * 3, 1);
+      // Idle bob
+      groupRef.current.position.y = Math.sin(performance.now() * 0.001) * 0.05;
     }
   });
 
   return (
-    <Float speed={1.4} rotationIntensity={0.25} floatIntensity={0.5}>
-      <group ref={groupRef}>
-        {index === 0 && <Laptop />}
-        {index === 1 && <Tablet />}
-        {index === 2 && <Phone />}
-      </group>
-    </Float>
+    <group ref={groupRef}>
+      {index === 0 && <Laptop />}
+      {index === 1 && <Tablet />}
+      {index === 2 && <Phone />}
+    </group>
   );
 }
 
@@ -60,17 +68,40 @@ export function DeviceShowcase({ index }: DeviceShowcaseProps) {
   return (
     <Canvas
       shadows
-      dpr={[1, 1.8]}
-      camera={{ position: [0, 0.4, 6], fov: 38 }}
+      dpr={[1, 2]}
+      camera={{ position: [0, 0.3, 5.2], fov: 35 }}
       gl={{ antialias: true, alpha: true }}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[4, 5, 6]} intensity={1.2} castShadow />
-      <directionalLight position={[-5, -2, -3]} intensity={0.4} color="#00CFFF" />
-      <pointLight position={[0, 0, 4]} intensity={0.6} color="#0066FF" />
+      {/* Studio lighting */}
+      <ambientLight intensity={0.45} />
+      <directionalLight
+        position={[3, 5, 5]}
+        intensity={1.4}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+      />
+      <directionalLight position={[-4, 2, -3]} intensity={0.5} color="#00CFFF" />
+      <pointLight position={[0, -2, 4]} intensity={0.6} color="#0066FF" />
+      <spotLight
+        position={[0, 6, 3]}
+        angle={0.4}
+        penumbra={1}
+        intensity={0.8}
+        color="#ffffff"
+      />
+
       <Suspense fallback={null}>
         <DeviceStage index={index} />
+        <ContactShadows
+          position={[0, -1.55, 0]}
+          opacity={0.55}
+          scale={8}
+          blur={2.4}
+          far={3}
+          color="#000"
+        />
         <Environment preset="city" />
       </Suspense>
     </Canvas>
