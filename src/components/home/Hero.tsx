@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useTransform, MotionValue, Variants } from 'fr
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Cloud, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedCounter } from './LogoTicker';
+import { DeviceShowcase } from './three/DeviceShowcase';
 
 const SLIDE_DATA = [
   {
@@ -322,102 +323,77 @@ export const Hero: React.FC<HeroProps> = ({ smoothX, smoothY }) => {
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
-            className="relative order-1 lg:order-2 flex items-center justify-center lg:justify-end lg:pr-8"
+            className="relative order-1 lg:order-2 flex items-center justify-center lg:justify-end lg:pr-4"
+            style={{ x: imgX, y: imgY }}
           >
-            {/* Glow blob behind image */}
+            {/* Glow blob behind 3D model */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] aspect-square rounded-full blur-[80px] opacity-40 z-0 pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] aspect-square rounded-full blur-[80px] opacity-50 z-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 80%)',
+                background: 'radial-gradient(circle, var(--color-primary) 0%, transparent 70%)',
               }}
             />
 
-            {/* Image frame */}
+            {/* 3D Device Showcase — laptop / tablet / phone per slide */}
+            <div className="relative z-10 w-full max-w-[520px] aspect-square">
+              <DeviceShowcase index={currentIndex} />
+            </div>
+
+            {/* Floating badges */}
             <motion.div
-              style={{
-                x: imgX,
-                y: imgY,
-                background: 'var(--color-surface)',
-                border: '1px solid color-mix(in srgb, var(--color-primary-foreground) 10%, transparent)',
-                boxShadow: '0 25px 50px -12px rgb(0, 0, 0, 0.5), 0 0 60px color-mix(in srgb, var(--color-primary) 15%, transparent)',
-              }}
-              className="relative z-10 h-[85vh] w-full max-w-[400px] aspect-[3/4] rounded-[2rem] sm:rounded-[2.5rem] p-2 sm:p-3 my-auto"
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute top-6 sm:top-10 left-0 sm:-left-4 lg:-left-8 z-20"
             >
-              {/* Image Container */}
-              <div className="w-full h-full relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
-                <AnimatePresence mode="popLayout" custom={direction}>
-                  <motion.img
-                    key={currentIndex}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    src={SLIDE_DATA[currentIndex].img}
-                    alt={SLIDE_DATA[currentIndex].title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-
-                {/* Subtle overlay tint */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1.2, ease: 'backOut' }}
+                className="flex items-center gap-3 md:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl backdrop-blur-xl"
+                style={{
+                  background: 'var(--color-primary)',
+                  border: '1px solid color-mix(in srgb, var(--color-primary-foreground) 15%, transparent)',
+                  boxShadow: '0 16px 32px color-mix(in srgb, var(--color-primary) 15%, transparent)',
+                }}
+              >
                 <div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'linear-gradient(135deg, var(--color-primary) 0%, transparent 20%)',
-                  }}
-                />
-              </div>
-
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-4 sm:top-10 -left-6 sm:-left-12 lg:-left-16 z-20"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1.2, ease: 'backOut' }}
-                  className="flex items-center gap-3 md:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl backdrop-blur-xl"
-                  style={{
-                    background: 'var(--color-primary)',
-                    border: '1px solid color-mix(in srgb, var(--color-primary-foreground) 15%, transparent)',
-                    boxShadow: '0 16px 32px color-mix(in srgb, var(--color-primary) 15%, transparent)',
-                  }}
+                  className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: 'color-mix(in srgb, var(--color-primary-foreground) 20%, transparent)' }}
                 >
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0" style={{ background: 'color-mix(in srgb, var(--color-primary-foreground) 20%, transparent)' }}>
-                    <Shield size={20} style={{ color: 'var(--color-primary-foreground)' }} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold leading-tight" style={{ color: 'var(--color-primary-foreground)' }}>System Secure</p>
-                    <p className="text-xs mt-0.5" style={{ color: 'color-mix(in srgb, var(--color-primary-foreground) 80%, transparent)' }}>Zero threats detected</p>
-                  </div>
-                </motion.div>
+                  <Shield size={20} style={{ color: 'var(--color-primary-foreground)' }} />
+                </div>
+                <div>
+                  <p className="text-sm font-bold leading-tight" style={{ color: 'var(--color-primary-foreground)' }}>System Secure</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'color-mix(in srgb, var(--color-primary-foreground) 80%, transparent)' }}>Zero threats detected</p>
+                </div>
               </motion.div>
+            </motion.div>
 
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+              className="absolute bottom-6 sm:bottom-12 right-0 sm:-right-4 lg:-right-6 z-20"
+            >
               <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-6 sm:bottom-12 -right-4 sm:-right-10 lg:-right-12 z-20"
+                initial={{ opacity: 0, y: -20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1.4, ease: 'backOut' }}
+                className="flex items-center gap-3 md:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl backdrop-blur-xl shadow-[0_16px_32px_rgba(0,0,0,0.4)]"
+                style={{
+                  background: 'color-mix(in srgb, var(--color-background) 85%, transparent)',
+                  border: '1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent)',
+                }}
               >
-                <motion.div
-                  initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1.4, ease: 'backOut' }}
-                  className="flex items-center gap-3 md:gap-4 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl backdrop-blur-xl shadow-[0_16px_32px_rgba(0,0,0,0.4)]"
-                  style={{
-                    background: 'color-mix(in srgb, var(--color-background) 85%, transparent)',
-                    border: '1px solid color-mix(in srgb, var(--color-foreground) 15%, transparent)',
-                  }}
+                <div
+                  className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: 'color-mix(in srgb, var(--color-primary) 10%, transparent)' }}
                 >
-                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center shrink-0" style={{ background: 'color-mix(in srgb, var(--color-primary) 10%, transparent)' }}>
-                    <Cloud size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-foreground leading-tight">99.9% Uptime</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">Cloud operations</p>
-                  </div>
-                </motion.div>
+                  <Cloud size={20} className="text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-foreground leading-tight">99.9% Uptime</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Cloud operations</p>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>
