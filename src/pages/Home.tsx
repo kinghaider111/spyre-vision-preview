@@ -4,8 +4,11 @@ import { Hero } from '../components/home/Hero';
 import { LogoTicker } from '../components/home/LogoTicker';
 import { ProductsGrid } from '../components/home/ProductsGrid';
 import { ExpertiseSection } from '../components/home/ExpertiseSection';
+import { TechnologiesSection } from '../components/home/TechnologiesSection';
 import { AcademyTeaser } from '../components/home/AcademyTeaser';
+import { PowerComparison } from '../components/home/PowerComparison';
 import { TestimonialsGrid } from '../components/home/TestimonialsGrid';
+import { FAQSection } from '../components/home/FAQSection';
 import { HomeCTA } from '../components/home/HomeCTA';
 import SEO from '../components/SEO';
 
@@ -29,15 +32,18 @@ const Home = () => {
   return (
     <div className="overflow-x-hidden">
       <SEO 
-        title="Leading AI & Cloud Solutions"
-        description="TechnoSpyre Inc. specializes in engineering, scaling, and managing resilient technology ecosystems for modern businesses."
+        title="Smart Software, Hospital ERP & Tech Courses"
+        description="TechnoSpyre builds easy-to-use hospital management, ERP, websites, and mobile apps — and trains the next generation of developers."
       />
       <Hero smoothX={smoothX} smoothY={smoothY} />
       <LogoTicker />
       <ProductsGrid />
       <ExpertiseSection />
+      <TechnologiesSection />
       <AcademyTeaser />
+      <PowerComparison />
       <TestimonialsGrid />
+      <FAQSection />
       <HomeCTA />
     </div>
   );
