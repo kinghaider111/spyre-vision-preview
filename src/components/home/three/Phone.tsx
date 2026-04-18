@@ -1,7 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBrandScreen } from "./useBrandScreen";
+import { useScreenImage } from "./useScreenImage";
 
 /** High-fidelity iPhone Pro-style phone with rounded extruded body & dynamic island. */
 
@@ -32,13 +32,7 @@ export function Phone() {
     }
   });
 
-  const screenTexture = useBrandScreen({
-    width: 600,
-    height: 1300,
-    eyebrow: "On-the-Go Power",
-    title: "Build the Future",
-    tagline: "with TechnoSpyre",
-  });
+  const screenTexture = useScreenImage("/screens/phone-academy-screen.jpg");
 
   const geo = useMemo(() => {
     const bodyShape = roundedRectShape(1.55, 3.1, 0.28);

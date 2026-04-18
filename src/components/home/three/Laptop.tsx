@@ -1,7 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBrandScreen } from "./useBrandScreen";
+import { useScreenImage } from "./useScreenImage";
 
 /**
  * High-fidelity MacBook Pro-style laptop.
@@ -38,13 +38,7 @@ export function Laptop() {
     }
   });
 
-  const screenTexture = useBrandScreen({
-    width: 1280,
-    height: 800,
-    eyebrow: "Enterprise Software",
-    title: "Build the Future",
-    tagline: "with TechnoSpyre",
-  });
+  const screenTexture = useScreenImage("/screens/laptop-erp-screen.jpg");
 
   // Geometry — built once
   const geo = useMemo(() => {
