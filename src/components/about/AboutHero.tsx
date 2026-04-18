@@ -6,25 +6,29 @@ import { Link } from 'react-router-dom';
 export const AboutHero: React.FC = () => {
   return (
     <section className="relative pt-40 pb-28 overflow-hidden px-6 sm:px-8">
-      {/* Background layers */}
+      {/* Clean background — no stock image, layered glows + grid only */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&auto=format&fit=crop&q=80"
-          alt=""
-          aria-hidden
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/85 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-surface-container-lowest" />
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.04]"
+          className="absolute inset-0 pointer-events-none opacity-[0.05]"
           style={{
             backgroundImage:
               'linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
+            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 80%)',
           }}
         />
-        <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-primary/15 blur-[160px] rounded-full" />
-        <div className="absolute bottom-0 -left-10 w-[400px] h-[400px] bg-secondary/10 blur-[140px] rounded-full" />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-primary/20 blur-[160px] rounded-full"
+        />
+        <motion.div
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-0 -left-10 w-[400px] h-[400px] bg-accent/15 blur-[140px] rounded-full"
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
