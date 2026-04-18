@@ -1,7 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBrandScreen } from "./useBrandScreen";
+import { useScreenImage } from "./useScreenImage";
 
 /** High-fidelity iPad Pro-style tablet with rounded extruded body & recessed screen. */
 
@@ -32,13 +32,7 @@ export function Tablet() {
     }
   });
 
-  const screenTexture = useBrandScreen({
-    width: 820,
-    height: 1180,
-    eyebrow: "Mobile Workforce",
-    title: "Build the Future",
-    tagline: "with TechnoSpyre",
-  });
+  const screenTexture = useScreenImage("/screens/tablet-hms-screen.jpg");
 
   const geo = useMemo(() => {
     const bodyShape = roundedRectShape(2.4, 3.2, 0.16);
