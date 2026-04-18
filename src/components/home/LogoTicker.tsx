@@ -1,29 +1,30 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
-import { Globe, Cloud, Brain, Code2, Star } from 'lucide-react';
 
-import logo1 from '/logo1.png';
-import logo2 from '/logo2.png';
-import logo3 from '/logo3.png';
-import logo4 from '/logo4.png';
-import logo5 from '/logo5.png';
-import logo6 from '/logo6.png';
-import logo7 from '/logo7.png';
-import logo8 from '/logo8.png';
-import logo9 from '/logo9.png';
-import logo10 from '/logo10.png';
-
-const logos = [
-  { src: logo1, alt: 'logo1' },
-  { src: logo2, alt: 'logo2' },
-  { src: logo3, alt: 'logo3' },
-  { src: logo4, alt: 'logo4' },
-  { src: logo5, alt: 'logo5' },
-  { src: logo6, alt: 'logo6' },
-  { src: logo7, alt: 'logo7' },
-  { src: logo8, alt: 'logo8' },
-  { src: logo9, alt: 'logo9' },
-  { src: logo10, alt: 'logo10' },
+// Real partner logos uploaded by the client. Files live in /public/partners.
+const partners = [
+  { src: '/partners/bahria-town-logo-d1a3f8c43c-seeklogo.com.png', alt: 'Bahria Town' },
+  { src: '/partners/park-view-city.png', alt: 'Park View City' },
+  { src: '/partners/new-city.jpg', alt: 'New City' },
+  { src: '/partners/banu-mukhtar.jpg', alt: 'Banu Mukhtar' },
+  { src: '/partners/areaa-construction-north-pvt.-ltd..jpg', alt: 'AREAA Construction' },
+  { src: '/partners/asl_logo.png', alt: 'ASL' },
+  { src: '/partners/pgcl-logo-black1.png', alt: 'PGCL' },
+  { src: '/partners/jmc-logo.png', alt: 'JMC' },
+  { src: '/partners/gmis.png', alt: 'GMIS' },
+  { src: '/partners/base-college.jpg', alt: 'Base College' },
+  { src: '/partners/college_logo.jpg', alt: 'College' },
+  { src: '/partners/peshawar-excellence.jpg', alt: 'Peshawar Excellence' },
+  { src: '/partners/rsz_ajk-logo-symbol-57.png', alt: 'AJK' },
+  { src: '/partners/park-view-city.png', alt: 'Park View City' },
+  { src: '/partners/sangel.png', alt: 'Sangel' },
+  { src: '/partners/shenghui.png', alt: 'Shenghui' },
+  { src: '/partners/tomorroland.png', alt: 'Tomorroland' },
+  { src: '/partners/valley.png', alt: 'Valley' },
+  { src: '/partners/welcome.png', alt: 'Welcome' },
+  { src: '/partners/yomifood-copy.jpg', alt: 'Yomifood' },
+  { src: '/partners/izzat-ali-sha.png', alt: 'Izzat Ali Sha' },
+  { src: '/partners/rehmat.jpg', alt: 'Rehmat' },
 ];
 
 export const AnimatedCounter: React.FC<{ from: number; to: number; duration?: number; decimals?: number; suffix?: string; className?: string }> = ({ from, to, duration = 2.5, decimals = 0, suffix = "", className }) => {
@@ -49,29 +50,50 @@ export const AnimatedCounter: React.FC<{ from: number; to: number; duration?: nu
 
 export const LogoTicker: React.FC = () => {
   return (
-    <div className="w-full flex flex-col items-center">
-      <section className="py-8 bg-surface-container-lowest overflow-hidden border-y border-outline-variant relative z-30 shadow-[0_0_50px_rgba(251,146,60,0.08)]">
-        <div className="container mx-auto px-8 mb-4">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-bold text-center opacity-50">Trusted by Industry Leaders</p>
-        </div>
-        <div className="flex">
-          <motion.div
-            animate={{ x: '-50%' }}
-            transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-            className="flex items-center gap-24 whitespace-nowrap px-12"
-          >
-            {[...logos, ...logos, ...logos].map((logo, idx) => (
-              <div key={idx} className="flex items-center justify-center min-w-[120px]">
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-10 w-auto object-contain opacity-40 hover:opacity-100 transition-all duration-500 cursor-pointer"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-    </div>
+    <section className="py-14 bg-surface-container-lowest border-y border-outline-variant relative overflow-hidden">
+      {/* Edge fade masks for clean entry/exit */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-surface-container-lowest to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-surface-container-lowest to-transparent" />
+
+      <div className="container mx-auto px-8 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <span className="font-label text-primary text-[10px] sm:text-xs font-bold tracking-[0.4em] uppercase">
+            Trusted by Industry Leaders
+          </span>
+          <h3 className="text-lg sm:text-xl mt-2 text-on-surface-variant font-medium">
+            22+ enterprises across construction, education & retail
+          </h3>
+        </motion.div>
+      </div>
+
+      <div className="flex">
+        <motion.div
+          animate={{ x: '-50%' }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+          className="flex items-center gap-6 md:gap-10 whitespace-nowrap px-6"
+        >
+          {[...partners, ...partners].map((logo, idx) => (
+            <div
+              key={idx}
+              className="group flex items-center justify-center shrink-0 w-32 h-20 md:w-40 md:h-24 rounded-2xl bg-white border border-outline-variant shadow-sm hover:shadow-lg hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 p-3"
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                loading="lazy"
+                draggable={false}
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 };
